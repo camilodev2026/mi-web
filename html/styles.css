@@ -219,3 +219,8 @@ html {
 .contact-form {
    max-width: 500px;
 }
+
+#formMessage {
+   margin-top: 10px;
+   font-weight: 500;
+}
