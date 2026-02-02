@@ -1,19 +1,62 @@
 const form = document.getElementById("contact-Form");
 const message = document.getElementById("formMessage");
 
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    
-    const nombre = document.getElementById("nombre").value;
-    const email = document.getElementById("email").value;
-    const mensaje = document.getElementById("mensaje").value;
+function mostrarMensaje (texto, color)  {
+    message.textContent = texto;
+    message.style.color = color;
+}
+
+function validarFormulario()  {
+    const nombre = document.getElementById("nombre").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mensaje = document.getElementById("mensaje").value.trim();
 
     if (nombre === "" || email === "" ||  mensaje === "") {
-        message.textContent = "Por favor completa todos los campos";
-        message.style.color = "red";
-    } else {
-        message.textContent = "Mensaje enviado correctamente";
-        message.style.color = "green";    
-        form.reset();
+        mostrarMensaje("Por favor completa todos los campos", "red");
+        return;
     }
+
+    if (!email.includes("@"))  {
+        mostrarMensaje("El email no es valido", "red");
+        return;
+    }
+
+    mostrarMensaje("Mensaje enviado correctamente", "green");  
+    form.reset();
+ }   
+form.addEventListener("submit", function (event) {
+    event.preventDefault(); 
+    validarFormulario();
 });
+
+
+// =====================
+// PRACTICA DIA 1
+// =====================
+// let nombre = "Camilo";
+// let edad = 24;
+// let ciudad ="Lima";
+// console.log(nombre);
+// console.log(edad);
+// console.log(Barranquilla);
+
+
+// =======================
+// PRACTICA DIA 2
+// =======================
+// let survey = 5;
+// if (survey >= 3) {
+//    console.log("Ganaste");
+// }   else {
+//    console.log("No ganaste");
+// }
+
+// ======================
+// PRACTICA DIA 3
+// ======================
+// function saludar(nombre) {
+//    console.log("Hola " + nombre);
+// }
+// saludar("Camilo");
+// saludar("Juan");
+
