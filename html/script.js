@@ -1,9 +1,17 @@
+const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("contact-Form");
 const message = document.getElementById("formMessage");
 
 function mostrarMensaje (texto, color)  {
     message.textContent = texto;
     message.style.color = color;
+    limpiarMensaje();
+}
+
+function limpiarMensaje() {
+    setTimeout(( ) => {
+        message.textContent = "";
+     }, 3000);
 }
 
 function validarFormulario()  {
@@ -13,6 +21,7 @@ function validarFormulario()  {
 
     if (nombre === "" || email === "" ||  mensaje === "") {
         mostrarMensaje("Por favor completa todos los campos", "red");
+        document.getElementById("nombre").focus();
         return;
     }
 
@@ -21,13 +30,35 @@ function validarFormulario()  {
         return;
     }
 
-    mostrarMensaje("Mensaje enviado correctamente", "green");  
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando...";
+
+    setTimeout(() => { 
+        mostrarMensaje("Mensaje enviado correctamente", "green");
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar";
+        document.getElementById("nombre").focus();
+    }, 1500);
+
+
+     localStorage.setItem("nombreUsuario", nombre);
     form.reset();
+    document.getElementById("nombre").focus();
  }   
+    
+
 form.addEventListener("submit", function (event) {
     event.preventDefault(); 
     validarFormulario();
 });
+const nombreGuardado =
+localStorage.getItem("nombreUsuario");
+
+if(nombreGuardado) {
+    document.getElementById("nombre").value =
+nombreGuardado; 
+}
 
 
 // =====================
